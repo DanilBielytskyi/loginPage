@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" class="page-background">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="registration-styles.css">
+</head>
+<body>
+<div class="registration-box">
+    <span>Registration</span>
+    <form autocomplete="on" class="form-styles" id="registration-form" >
+        <div class="input-styles">
+            <input placeholder="Имя" type="text" name="name">
+        </div>
+
+        <div class="input-styles">
+            <input placeholder="Фамилия" type="text" name="surname">
+        </div>
+
+        <div class="input-styles">
+            <input placeholder="Email" type="email" name="email">
+        </div>
+
+        <div class="input-styles">
+            <input placeholder="Пароль" type="password" name="password">
+        </div>
+
+        <button type="submit" class="submit-button">Отправить</button>
+    </form>
+</div>
+
+    <script>
+        const form = document.getElementById(`registration-form`);
+
+        form.addEventListener(`submit`, async (e)=>{
+            e.preventDefault()
+            const regForm = new FormData(form)
+
+            const userData = {
+                name: regForm.get(`name`),
+                surname: regForm.get(`surname`),
+                email: regForm.get(`email`),
+                password: regForm.get(`password`),
+            }
+
+            let response = await fetch(`/api/registration`,{
+                method:`POST`,
+                headers:{
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(userData)
+            })
+
+            if(response.ok){
+                alert(JSON.stringify(await response.json()))
+            } else {
+                alert(await response.text())
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <h1>Welcome to the club body</h1>
+    <a href="/registration.html">register page</a>
+    <button id="button-get">XML GET</button>
+
+    <script>
+        let buttonGet = document.getElementById(`button-get`);
+        buttonGet.addEventListener(`click`,async (event) => {
+            let response = await fetch(`/test`)
+
+            alert(await response.blob())
+
+        })
+    </script>
+</body>
+</html>
